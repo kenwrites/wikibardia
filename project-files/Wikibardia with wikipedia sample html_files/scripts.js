@@ -4,28 +4,14 @@ const wiki_output = document.querySelector('#wiki-output')
 var url = 'https://en.wikipedia.org/w/api.php?action=parse&origin=*&page=Pet_door&prop=text&section=0&format=json'
 var wiki_request = new XMLHttpRequest();
 
-var article
-article = document.createElement('div')
-
-function get_article_html(request) {
-    let wiki_json
-    wiki_json = JSON.parse(request.response)
-    return = wiki_json.parse.text["*"]   
-}
-
-
-function remove_thumbs(div) {
-    // let selector = section_id + " div.thumb"
-    let new_div
-
-
+function remove_thumbs(section_id) {
+    let selector = section_id + " div.thumb"
     let imgs = document.querySelectorAll(selector)
     for (let i = 0; i < imgs.length; i++) {
         let image = imgs[i]
         let parent = image.parentNode
         parent.removeChild(image)
     }
-    return new_div
 }
 
 wiki_request.onreadystatechange = () => {
@@ -42,10 +28,14 @@ wiki_request.onreadystatechange = () => {
    
             console.log("xhr status: " + wiki_request.status)
 
-            article = get_article_html()
-            wiki_output.innerHTML = article
+            let wiki_json
+            let article_html
 
-            remove_thumbs('#wiki-output')
+            wiki_json = JSON.parse(wiki_request.response)
+            article_html = wiki_json.parse.text["*"]   
+            wiki_output.innerHTML = article_html
+
+            remove_thumbs('#wiki_output')
 
         } else { 
 
@@ -58,3 +48,4 @@ wiki_request.onreadystatechange = () => {
 
 wiki_request.open('GET', url)
 wiki_request.send()
+
