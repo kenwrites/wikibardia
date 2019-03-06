@@ -10,21 +10,18 @@ article = document.createElement('div')
 function get_article_html(request) {
     let wiki_json
     wiki_json = JSON.parse(request.response)
-    return = wiki_json.parse.text["*"]   
+    return(wiki_json.parse.text["*"])
 }
 
-
 function remove_thumbs(div) {
-    // let selector = section_id + " div.thumb"
     let new_div
-
-
-    let imgs = document.querySelectorAll(selector)
+    let imgs = div.querySelectorAll('div.thumb')
     for (let i = 0; i < imgs.length; i++) {
         let image = imgs[i]
         let parent = image.parentNode
         parent.removeChild(image)
     }
+    new_div = div
     return new_div
 }
 
@@ -42,14 +39,15 @@ wiki_request.onreadystatechange = () => {
    
             console.log("xhr status: " + wiki_request.status)
 
-            article = get_article_html()
-            wiki_output.innerHTML = article
-
-            remove_thumbs('#wiki-output')
+            wiki_output.innerHTML = ''
+            article.innerHTML = get_article_html(wiki_request)
+            article = remove_thumbs(article)
+            wiki_output.appendChild(article)
 
         } else { 
 
-            console.log("xhr status: " + wiki_request.status)        
+            console.log("xhr status: " + wiki_request.status)
+            
             wiki_section.innerHTML = '<p>There was a problem with the data from Wikipedia</p>'
        
         } // end (status === 200)
