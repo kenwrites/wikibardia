@@ -59,9 +59,27 @@ Copyright John Stracke.  Released under SIL Open Font License.  */
 /* Main Styles */
 
 body {
-  padding: 1rem;
+  padding: 0 1rem 0;
 }
 
 header {
   text-align: center;
 }
+
+/* Responsive Styles */
+
+@media (min-width: 60rem) {
+  
+  body {
+    padding: 2rem;
+  }
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .flex-item {
+    width: calc(50% - 1.5rem)
+  }
+}
+
