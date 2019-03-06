@@ -39,6 +39,8 @@ wiki_request.onreadystatechange = () => {
    
             console.log("xhr status: " + wiki_request.status)
 
+            // process Wikipedia response and set wiki-output
+
             wiki_output.innerHTML = ''
             article.innerHTML = get_article_html(wiki_request)
             article = remove_thumbs(article)

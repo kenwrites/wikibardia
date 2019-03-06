@@ -98,14 +98,21 @@ footer {
 
 /* Responsive Styles */
 
-@media (min-width: 60rem) {
+@media (min-width: 40rem) {
   
   body {
     padding: 2rem;
   }
+
+  header {
+    padding-bottom: 3rem;
+  }
+
   .wrapper {
     display: flex;
     justify-content: space-between;
+    max-width: 62rem;
+    margin: 0 auto;
   }
 
   .flex-item {
