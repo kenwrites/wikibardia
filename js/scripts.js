@@ -3,6 +3,7 @@ const wiki_output = document.querySelector('#wiki-output')
 const shakes_output = document.querySelector('#shakes-output')
 const search_btn = document.querySelector('#search')
 const search_input = document.querySelector('#wiki-search')
+const search_status = document.querySelector('#search-status')
 const pageid_location = "query.search.0.pageid"
 const wiki_text_location = 'parse.text.*'
 
@@ -14,10 +15,6 @@ var wiki_sr_request = new XMLHttpRequest()
 var shakes_request = new XMLHttpRequest()
 var wiki_text
 var article
-
-// testing
-// end testing
-
 
 article = document.createElement('div')
 
@@ -110,9 +107,12 @@ wiki_sr_request.onreadystatechange = () => {
     if (wiki_sr_request.readyState < 4) {
 
         console.log("wiki sr xhr readyState: " + wiki_sr_request.readyState)
-        let status = document.createElement('p')
-        status.innerText = "Searching..."
-        wiki_output.appendChild(status)
+        
+        if (search_status.childElementCount === 0) {
+            let status = document.createElement('p')
+            status.innerText = "Searching..."
+            search_status.appendChild(status)
+        }
 
     } else if (wiki_sr_request.readyState === 4) {
 
