@@ -125,5 +125,5 @@ shakes_request.onreadystatechange = () => {
 
 // Program
 
-wiki_request.open('GET', wikipedia_url)
-wiki_request.send()
+// wiki_request.open('GET', wikipedia_url)
+// wiki_request.send()

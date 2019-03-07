@@ -8,6 +8,10 @@ html {
   box-sizing: inherit;
 }
 
+button {
+  border: none;
+}
+
 /* Fonts */
 
 /* "Essays 1743" ............................................ http://www.thibault.org/fonts/essays/ 
@@ -56,16 +60,20 @@ Copyright John Stracke.  Released under SIL Open Font License.  */
   font-family: inherit;
 }
 
-.essays-font p {
-  font-size: 1.35em;
-}
-
 .sans-serif {
-      font-family: Palatino, "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
+  font-family: Palatino, "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
 }
 
 .sans-serif * {
   font-family: inherit;
+}
+
+.essays-font p ,
+#wiki-getter label,
+#wiki-getter p,
+#wiki-getter button,
+#wiki-getter input {
+  font-size: 1.35em;
 }
 
 /* Main Styles */
@@ -73,6 +81,47 @@ Copyright John Stracke.  Released under SIL Open Font License.  */
 body {
   padding: 0 1rem 0;
 }
+
+footer {
+  margin-bottom: 1rem;
+}
+
+#shakes-output,
+#wiki-output {
+  min-height: 25rem;
+}
+
+/* Form styles */
+
+.form-grp * {
+  margin-top: .25rem;
+}
+
+.form-grp {
+  width: 100%;
+  max-width: 22rem;
+  margin: 1.5rem auto 0;
+}
+
+.form-grp input {
+  width: 100%;
+  border-radius: .25rem;
+  border: none;
+  box-shadow: 0 0 2px 0 rgba(0,0,0, .8);
+}
+
+form button {
+  display: block;
+  margin: 2rem auto 0;
+  background-color: #222222;
+  color: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: .25rem;
+}
+
+
+
+/* Reusable utility classes */
 
 .rounded {
   background-color: #cccccc;
@@ -90,10 +139,6 @@ body {
 
 .center-text {
   text-align: center;
-}
-
-footer {
-  margin-bottom: 1rem;
 }
 
 /* Responsive Styles */
@@ -119,14 +164,17 @@ footer {
     width: calc(50% - 1.5rem)
   }
 
-  footer {
+
+  .rounded-mobile {
+    background-color: unset;
+    padding: unset;
+    border-radius: unset;
+    box-shadow: unset;
+  }
+
+  #main-footer {
     margin-bottom: unset;
     padding-top: 1rem;
   }
 
-  .rounded-mobile {
-  background-color: unset;
-  padding: unset;
-  border-radius: unset;
-  box-shadow: unset;
 }
