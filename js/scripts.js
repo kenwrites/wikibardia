@@ -98,7 +98,7 @@ shakes_request.onreadystatechange = () => {
     if (shakes_request.readyState < 4) {
 
         console.log("shakes xhr readyState: " + shakes_request.readyState)
-        shakes_output.innerHTML = '<p>Request sent.</p><p> Waiting for response from FunTranslations server.</p>'
+        shakes_output.innerHTML = '<p>Your request did I send.</p><p>Awaiting FunTranslations their response to come hither.</p>'
     
     } else if (shakes_request.readyState === 4) {
 
@@ -117,7 +117,7 @@ shakes_request.onreadystatechange = () => {
         } else {
 
             console.log("shakes xhr status: " + shakes_request.status)
-            shakes_output.innerHTML = '<p>There was a problem with the data from FunTranslations.</p>'
+            shakes_output.innerHTML = '<p>Mine most humble apology: a problem thither wast with the data from Funtranslations.</p>'
 
         } // end (status === 200)
     } // end (readyState === 4)
