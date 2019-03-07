@@ -15,6 +15,7 @@ var wiki_sr_request = new XMLHttpRequest()
 var shakes_request = new XMLHttpRequest()
 var wiki_text
 var article
+var returned_0
 
 article = document.createElement('div')
 
@@ -108,10 +109,11 @@ wiki_sr_request.onreadystatechange = () => {
 
         console.log("wiki sr xhr readyState: " + wiki_sr_request.readyState)
         
-        if (search_status.childElementCount === 0) {
-            let status = document.createElement('p')
-            status.innerText = "Searching..."
-            search_status.appendChild(status)
+        if (search_status.childElementCount === 0 ||
+            returned_0 === true)
+        {
+            returned_0 = false 
+            search_status.innerHTML = "<p>Searching ... </p>"
         }
 
     } else if (wiki_sr_request.readyState === 4) {
@@ -121,6 +123,13 @@ wiki_sr_request.onreadystatechange = () => {
         if (wiki_sr_request.status == 200) {
 
             console.log("wiki sr xhr status: " + wiki_sr_request.status)
+
+            let wiki_sr_response = JSON.parse(wiki_sr_request.response)
+
+            if (wiki_sr_response.query.searchinfo.totalhits === 0) {
+                returned_0 = true
+                search_status.innerHTML = "<p>Sorry, that search returned no results.  Try again.</p>"
+            }
 
             let pageid
             let wiki_parse_url
