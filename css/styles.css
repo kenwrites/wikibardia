@@ -121,6 +121,7 @@ footer {
 
   footer {
     margin-bottom: unset;
+    padding-top: 1rem;
   }
 
   .rounded-mobile {
