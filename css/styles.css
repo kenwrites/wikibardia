@@ -108,6 +108,7 @@ footer {
   border-radius: .25rem;
   border: none;
   box-shadow: 0 0 2px 0 rgba(0,0,0, .8);
+  line-height: 1.5;
 }
 
 form button {
@@ -117,6 +118,20 @@ form button {
   color: #ffffff;
   padding: 1rem 2rem;
   border-radius: .25rem;
+}
+
+form button:hover,
+form button:focus {
+  box-shadow:  0 0 7px  rgba(255, 255, 255, 1) inset;
+  background-color: #333;
+}
+
+form button:hover {
+  cursor: pointer;
+}
+
+form button:active {
+  box-shadow:  0 0 14px  rgba(255, 255, 255, 1) inset;
 }
 
 
