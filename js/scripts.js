@@ -30,6 +30,14 @@ article = document.createElement('div')
 Functions
 ******************************************************************/
 
+function search_wikipedia() {
+    let sr_value = search_input.value
+    search_input.value = ''
+    let wiki_sr_url = make_api_url('srsearch', sr_value, wikipedia_sr_url, true)
+    wiki_sr_request.open('GET', wiki_sr_url)
+    wiki_sr_request.send()
+}
+
 function select_item(object, key_array) {
     if (key_array.length === 0) {
         return object
@@ -117,10 +125,10 @@ wiki_sr_request.onreadystatechange = () => {
             }
 
             let pageid
-            let wiki_parse_url
+            let wiki_api_url
             pageid = get_item_from_json_request(wiki_sr_request, pageid_location)
-            wiki_parse_url = make_api_url('pageid', pageid, wikipedia_url, true)
-            wiki_request.open('GET', wiki_parse_url)
+            wiki_api_url = make_api_url('pageid', pageid, wikipedia_url, true)
+            wiki_request.open('GET', wiki_api_url)
             wiki_request.send()
 
         } else {
@@ -159,8 +167,9 @@ wiki_request.onreadystatechange = () => {
             let p = article.querySelector('.mw-parser-output p')
             wiki_text = get_wiki_text(p)
 
-            shakes_request_url = make_api_url('text', wiki_text, shakes_request_url, false)
-            shakes_request.open('POST', shakes_request_url)
+            let shakes_api_url
+            shakes_api_url = make_api_url('text', wiki_text, shakes_request_url, false)
+            shakes_request.open('POST', shakes_api_url)
             shakes_request.send()
 
         } else { 
@@ -207,11 +216,14 @@ shakes_request.onreadystatechange = () => {
 Form listeners
 ******************************************************************/
 
+search_input.addEventListener('keypress', (event) => {
+    if (event.keyCode === 13 || event.key.toLowerCase() === 'enter') {
+        event.preventDefault()
+        search_wikipedia()
+    }
+})
+
 search_btn.addEventListener('click', () => {
-    let sr_value = search_input.value 
-    search_input.value = ''
-    let wiki_sr_url = make_api_url('srsearch', sr_value, wikipedia_sr_url, true)
-    wiki_sr_request.open('GET', wiki_sr_url)
-    wiki_sr_request.send()
+    search_wikipedia()
 })
 
