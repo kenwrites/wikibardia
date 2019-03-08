@@ -1,15 +1,22 @@
+// DOM constants
 const wiki_section = document.querySelector('#wiki-getter')
 const wiki_output = document.querySelector('#wiki-output')
 const shakes_output = document.querySelector('#shakes-output')
 const search_btn = document.querySelector('#search')
 const search_input = document.querySelector('#wiki-search')
 const search_status = document.querySelector('#search-status')
-const pageid_location = "query.search.0.pageid"
-const wiki_text_location = 'parse.text.*'
 
-var wikipedia_url = 'https://en.wikipedia.org/w/api.php?action=parse&origin=*&prop=text&section=0&format=json'
-var wikipedia_sr_url = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&list=search&srlimit=1&srenablerewrites=1&format=json'
-var shakes_request_url = 'https://api.funtranslations.com/translate/shakespeare.json?'
+// JSON item locations
+const pageid_location = 'query.search.0.pageid'
+const wiki_text_location = 'parse.text.*'
+const shakes_p_location = 'contents.translated'
+
+// API Base URLs
+const wikipedia_url = 'https://en.wikipedia.org/w/api.php?action=parse&origin=*&prop=text&section=0&format=json'
+const wikipedia_sr_url = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&list=search&srlimit=1&srenablerewrites=1&format=json'
+const shakes_request_url = 'https://api.funtranslations.com/translate/shakespeare.json?'
+
+// Variables
 var wiki_request = new XMLHttpRequest()
 var wiki_sr_request = new XMLHttpRequest()
 var shakes_request = new XMLHttpRequest()
@@ -39,23 +46,13 @@ function get_item_from_json_request(request, item_location) {
     
     let json
     let item 
+    let keys
     json = JSON.parse(request.response)
     keys = item_location.split('.')
     
     item = select_item(json, keys)
 
     return item
-}
-
-function get_shakes_html(request) {
-    let p 
-    p = document.createElement('p')
-    
-    let shakes_json
-    shakes_json = JSON.parse(request.response)
-    p.innerText = shakes_json.contents.translated
-
-    return p
 }
 
 function remove_thumbs(div) {
@@ -89,6 +86,8 @@ function make_api_url(key, value, base_url, ampersand) {
 /*****************************************************************
  AJAX Listeners
 ******************************************************************/
+
+// Wikipedia Article Search
 
 wiki_sr_request.onreadystatechange = () => {
     if (wiki_sr_request.readyState < 4) {
@@ -132,6 +131,8 @@ wiki_sr_request.onreadystatechange = () => {
     }
 }
 
+// Wikipedia Page Request 
+
 wiki_request.onreadystatechange = () => {
     if (wiki_request.readyState < 4) {
    
@@ -171,6 +172,8 @@ wiki_request.onreadystatechange = () => {
     } // end (readyState === 4)
 } // end .onreadystatechange listener 
 
+// FunTranslations Request
+
 shakes_request.onreadystatechange = () => {
     if (shakes_request.readyState < 4) {
 
@@ -187,8 +190,8 @@ shakes_request.onreadystatechange = () => {
 
             console.log("shakes xhr status: " + shakes_request.status)
             shakes_output.innerHTML = ''
-            let shakes_p 
-            shakes_p = get_shakes_html(shakes_request)            
+            let shakes_p = document.createElement('p')
+            shakes_p.innerText = get_item_from_json_request(shakes_request, shakes_p_location)
             shakes_output.appendChild(shakes_p)
             
         } else {
