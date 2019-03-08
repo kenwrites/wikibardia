@@ -24,41 +24,27 @@ Functions
 ******************************************************************/
 
 function select_item(object, key_array) {
-
     if (key_array.length === 0) {
-
         return object
-    
     } else {
-
         let selector = key_array.shift()
         let selection = object[selector]
         return select_item(selection, key_array)
-
     }
 }
 
 function get_item_from_json_request(request, item_location) {
-
     // item_location should be a dot-notation string specifying
     // the location of the item.  i.e 'search.0.pageid'
     
     let json
     let item 
-    
     json = JSON.parse(request.response)
     keys = item_location.split('.')
     
     item = select_item(json, keys)
 
     return item
-
-}
-
-function get_article_html(request) {
-    let wiki_json
-    wiki_json = JSON.parse(request.response)
-    return(wiki_json.parse.text["*"])
 }
 
 function get_shakes_html(request) {
@@ -120,7 +106,7 @@ wiki_sr_request.onreadystatechange = () => {
 
         console.log("wiki sr xhr readyState: " + wiki_sr_request.readyState)
 
-        if (wiki_sr_request.status == 200) {
+        if (wiki_sr_request.status === 200) {
 
             console.log("wiki sr xhr status: " + wiki_sr_request.status)
 
@@ -163,7 +149,7 @@ wiki_request.onreadystatechange = () => {
             // process Wikipedia response and set wiki-output
 
             wiki_output.innerHTML = ''
-            article.innerHTML = get_article_html(wiki_request)
+            article.innerHTML = get_item_from_json_request(wiki_request, wiki_text_location)
             article = remove_thumbs(article)
             wiki_output.appendChild(article)
 
