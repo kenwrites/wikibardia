@@ -8,13 +8,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
+
+  <!-- Header -->
+
   <header class='essays-font center-text'>
     <h1>WikiBardia</h1>
     <p>A Shakespeare Translator for Wikipedia.</p>
     <p>'Cause, you know, everybody needs one.</p>
   </header>
+  
+  <!-- Main Columns -->
+
   <main>
     <div class='wrapper'>
+  
+      <!-- Wikipedia Form & Output  -->
+
       <section id='wiki-getter' class='sans-serif flex-item rounded'>
         <h1>Wikipedia Article</h1>
         <div id="wiki-output">
@@ -26,20 +35,29 @@
             <button type="button" id='search'>Search</button>
           </form>  
           <div id='search-status'></div>
-        </div>
-      </section>
+        </div>  <!-- /wiki-output -->
+      </section> <!-- /Wikipedia -->
+
+      <!-- Shakespeare Output -->
+
       <section id='shakes-getter' class='essays-font flex-item'>
         <h1>Translation from the Bard</h1>
         <div id='shakes-output'>
-  
+
         </div>
-      </section>
-    </div>
+      </section> <!-- / Shakespeare -->
+      
+    </div>   <!-- /wrapper -->
+
+    <!-- Footer -->
+
     <footer id='main-footer' class='sans-serif center-text rounded-mobile'>
       <p>A project by mediocre writer and anachronistic font afficionado Ken Farrell. </p>
       <p><a href='https://github.com/kenwrites'>Find me on Github</a>.</p>
     </footer>
   </main>
+
   <script src="js/scripts.js"></script>
+
 </body>
 </html>
